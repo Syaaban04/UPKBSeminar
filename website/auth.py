@@ -27,7 +27,7 @@ def create_new_password(token):
 
     return render_template('create_new_password.html', token=token)
 
-@auth.route('/login', methods=['GET', 'POST'])
+@auth.route('/', methods=['GET', 'POST'])
 def login():
 
     find_admin = models.User.query.filter_by(email='admin12@gmail.com').first()
