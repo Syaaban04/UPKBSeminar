@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPKBN - Contact Us</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="static/images/favicon.png">
+    <style>
+        /* Colors and styling adjustments */
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .contact-header {
+            font-weight: bold;
+            font-size: 2rem;
+            color: #333;
+        }
+        .contact-subtext {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        .contact-button {
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 0.8rem 1.5rem;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .call-button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+        }
+        .call-button:hover {
+            background-color: #555;
+        }
+        .email-button {
+            border: 2px solid #333;
+            color: #333;
+            background-color: #fff;
+        }
+        .email-button:hover {
+            background-color: #333;
+            color: #fff;
+        }
+        .contact-address {
+            font-size: 1rem;
+            color: #333;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .map-responsive {
+            position: relative;
+            overflow: hidden;
+            padding-top: 56.25%;
+        }
+        .map-responsive iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .mgn {
+    position: absolute;
+    top: 20px; /* Distance from the top */
+    left: 20px; /* Distance from the left */
+    background-color: white;
+    border-radius: 50%; /* Optional for a circular background */
+    padding: 5px; /* Adds padding around the icon */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for styling */
+}
+
+.mgn:hover {
+    background-color: rgb(216, 216, 216);
+    cursor: pointer;
+}
+
+@media (max-width: 800px) {
+        .mgn {
+        top: 10px;
+        left: 10px;
+        width: 40px; /* Smaller size for smaller screens */
+        padding: 3px;
+    }
+}
+    </style>
+</head>
+<body>
+    <form method="post">
+        <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+            <img class="mgn" src="https://cdn.iconscout.com/icon/free/png-256/back-arrow-1767523-1502427.png" width="50px" alt="Back">
+        </button>
+    </form> 
+<div class="container my-5">
+    <div class="text-center">
+        <h1 class="contact-header">Reach Out to Us</h1>
+        <p class="contact-subtext">We're happy to answer any questions you may have and help you</p>
+    </div>
+    
+    <div class="d-flex justify-content-center gap-3 my-4">
+        <button class="contact-button call-button">Call Us <br> +6018-230 2116 / +6013-639 7028</button>
+        <button class="contact-button email-button">Email Us <br> upkbtvet@gmail.com</button>
+    </div>
+    
+    <div class="text-center">
+        <h5 class="contact-header">Come And Visit Us</h5>
+        <p class="contact-address">No 37-2 Jalan MPK 4, Taman Bukit Kepayang, 70300 Seremban, 71700 Negeri Sembilan</p>
+        
+        <!-- Google Map Embed with Responsive Styling -->
+        <div class="map-responsive">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31835.885906358994!2d101.9400008!3d2.7285007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cdad55e15ed2cb%3A0xdf876f3c8c72a4a!2sJalan%20MPK%204%2C%20Taman%20Bukit%20Kepayang%2C%2070300%20Seremban%2C%20Negeri%20Sembilan!5e0!3m2!1sen!2smy!4v1699023874668!5m2!1sen!2smy" 
+                allowfullscreen="" loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+{% include 'footer.html'%}
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" type="image/png" href="static/images/favicon.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fcfcfc;
+            color: #000;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            padding: 1.5rem;
+        }
+        header img {
+            filter: grayscale(100%);
+        }
+
+        .navbar {
+            background-color: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+   
+        }
+        .navbar .nav-link {
+            color: #000;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .navbar .nav-link:hover {
+            color: #555;
+        }
+
+        .dropdown-menu .dropdown-submenu {
+            position: relative;
+        }
+        .dropdown-menu .dropdown-submenu > .dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -6px;
+            border-radius: 0.25rem;
+            display: none;
+        }
+        .dropdown-menu .dropdown-submenu:hover > .dropdown-menu {
+            display: block;
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        .sticky-alert {
+            position: sticky;
+            top: 0;
+            z-index: 1031;  /* Ensure it's above navbar and below other content */
+        }
+
+        .alert.fade-out {
+        opacity: 0;
+        transition: opacity 1s ease;
+    }
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="/admin">
+            <img src="https://upkb.my/img/logo.png" alt="UPKBN Logo" style="height: 75px;">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link fw-bold" href="/admin" style="color: #000;">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fw-bold" href="/gallery" style="color: #000;">Gallery</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle fw-bold" href="#" id="seminarRoomDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #000;">
+                        Conference Room
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="seminarRoomDropdown">
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="#" style="font-weight: bold;">Johor</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/seminarAdmin?negeri=Johor&daerah=Johor%20Bahru">Johor Bahru</a></li>
+                                <li><a class="dropdown-item" href="/seminarAdmin?negeri=Johor&daerah=Batu Pahat">Batu Pahat</a></li>
+                                <li><a class="dropdown-item" href="/seminarAdmin?negeri=Johor&daerah=Muar">Muar</a></li>
+                                <li><a class="dropdown-item" href="/seminarAdmin?negeri=Johor&daerah=Kluang">Kluang</a></li>
+                                <li><a class="dropdown-item" href="/seminarAdmin?negeri=Johor&daerah=Pasir%20Gudang">Pasir Gudang</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="#" style="font-weight: bold;">Selangor</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/seminarAdmin?negeri=Selangor&daerah=Puchong">Puchong</a></li>
+                                <li><a class="dropdown-item" href="/seminarAdmin?negeri=Selangor&daerah=Petaling%20Jaya">Petaling Jaya</a></li>
+                                <li><a class="dropdown-item" href="/seminarAdmin?negeri=Selangor&daerah=Klang">Klang</a></li>
+                                <li><a class="dropdown-item" href="/seminarAdmin?negeri=Selangor&daerah=Gombak">Gombak</a></li>
+                                <li><a class="dropdown-item" href="/seminarAdmin?negeri=Selangor&daerah=Kajang">Kajang</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="#" style="font-weight: bold;">Negeri Sembilan</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/seminarAdmin?negeri=Negeri%20Sembilan&daerah=Rembau">Rembau</a></li>
+                                <li><a class="dropdown-item" href="/seminarAdmin?negeri=Negeri%20Sembilan&daerah=Seremban">Seremban</a></li>
+                                <li><a class="dropdown-item" href="/seminarAdmin?negeri=Negeri%20Sembilan&daerah=Nilai">Nilai</a></li>
+                                <li><a class="dropdown-item" href="/seminarAdmin?negeri=Negeri%20Sembilan&daerah=Port%20Dickson">Port Dickson</a></li>
+                                <li><a class="dropdown-item" href="/seminarAdmin?negeri=Negeri%20Sembilan&daerah=Pedas">Pedas</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="#" style="font-weight: bold;">Kedah</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/seminarAdmin?negeri=Kedah&daerah=Baling">Baling</a></li>
+                                <li><a class="dropdown-item" href="/seminarAdmin?negeri=Kedah&daerah=Kulim">Kulim</a></li>
+                                <li><a class="dropdown-item" href="/seminarAdmin?negeri=Kedah&daerah=Alor%20Setar">Alor Setar</a></li>
+                                <li><a class="dropdown-item" href="/seminarAdmin?negeri=Kedah&daerah=Sungai%20Petani">Sungai Petani</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="#" style="font-weight: bold;">Kelantan</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/seminarAdmin?negeri=Kelantan&daerah=Pasir%20Puteh">Pasir Puteh</a></li>
+                                <li><a class="dropdown-item" href="/seminarAdmin?negeri=Kelantan&daerah=Kota%20Bharu">Kota Bharu</a></li>
+                                <li><a class="dropdown-item" href="/seminarAdmin?negeri=Kelantan&daerah=Pasir%20Mas">Pasir Mas</a></li>
+                                <li><a class="dropdown-item" href="/seminarAdmin?negeri=Kelantan&daerah=Kuala%20Krai">Kuala Krai</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="dropdown-item" href="/newseminar" style="font-weight: bold;">Add new</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fw-bold" href="/contact" style="color: #000;">Contact Us</a>
+                </li>
+            </ul>
+
+            <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
+
+        </div>
+    </div>
+</nav>
+
+<div class="sticky-alert">
+    {% with messages = get_flashed_messages(with_categories=true) %} 
+    {% if messages %} 
+        {% for category, message in messages %} 
+            {% if category == 'error' %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% else %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
+
+<div class="content">
+    {% block content %}{% endblock %}
+</div>
+{% include 'footer.html'%}
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<script>
+    // Automatically close alerts after 5 seconds
+    setTimeout(() => {
+        const alerts = document.querySelectorAll('.alert');
+        alerts.forEach(alert => {
+            alert.classList.add('fade-out'); // Add fade-out class
+            setTimeout(() => alert.remove(), 1000); // Remove the alert after fade-out transition
+        });
+    }, 3000);
+</script>
+</html>

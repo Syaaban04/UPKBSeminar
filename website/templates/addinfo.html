@@ -1,0 +1,290 @@
+{% extends 'navbarAdmin.html' %}
+{% block title %}UPKB - Edit Info {% endblock %}
+{% block content %}
+{% if value %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #ffffff;
+    }
+
+    .testimonial-section {
+        text-align: center;
+        padding: 50px 20px;
+        background-color: white;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .testimonial-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #333;
+    }
+
+    .testimonial-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .testimonial-card {
+        background-color: black;
+        color: white;
+        border: 2px solid #000000;
+        border-radius: 10px;
+        width: 300px;
+        height: 400px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .testimonial-card2 {
+        background-color: black;
+        color: white;
+        border: 2px solid #000000;
+        border-radius: 10px;
+        width: 300px;
+        height: 300px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        cursor: pointer;
+    }
+
+.testimonial-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .testimonial-images img {
+        width: 30%;
+        border: 3px solid black;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+    }
+
+    .testimonial-images img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .testimonial-header {
+        font-size: 18px;
+        margin-bottom: 10px;
+        color: #f39c12;
+        font-weight: bold;
+    }
+
+    .testimonial-name {
+        font-size: 16px;
+        margin: 10px 0;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .testimonial-job {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    /* Button Image Styling */
+    .button-container {
+        text-align: center;
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+
+    .button-container a {
+        display: inline-block;
+        text-decoration: none;
+    }
+
+    .button-container img {
+        width: 100px;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+ 
+    }
+
+    .button-container-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0; /* Optional margin for spacing */
+}
+
+
+    .button-container img:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .form-header {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #333;
+    }
+
+    .testimonial-header {
+        font-size: 24px;
+        border: none;
+        outline: none;
+        background: transparent;
+        width: 300px;
+        padding: 5px 10px;
+        color: #333;
+        text-align: center;
+        transition: font-size 0.3s ease, color 0.3s ease;
+        font-family: Arial, sans-serif;
+        text-transform: uppercase;
+    }
+    .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 16px;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            width: 200px;
+            font-weight: bold;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .button-box {
+    display: flex;
+    justify-content: center;
+    gap: 50px; /* Adjust the gap between the buttons */
+    margin-top: 10px;
+}
+
+.image-button {
+    display: inline-block;
+    background-color: #f0f0f0; /* Light grey background for the button */
+    border: 2px solid #ccc; /* Border for the button */
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px; /* Spacing around the image */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for a 3D effect */
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth hover effect */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.image-button:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+    background-color: #e8e8e8; /* Slightly darker background on hover */
+}
+
+.button-image {
+    width: 50px; /* Width of the image */
+    height: 50px; /* Height of the image */
+    display: block; /* Ensures image is centered in the button */
+    margin: 0 auto; /* Centers the image horizontally */
+}
+</style>
+<form method="post" enctype="multipart/form-data">
+    <div class="form-header">
+        <input type="text" name="name" class="testimonial-header" placeholder="Enter Name" value = "{{value.name}}" required>
+    </div>
+    <div class="testimonial-container">
+        <div class="testimonial-card2">
+            <label for="image1">
+                {% if value.image1 %}
+                <img src="data:image/jpeg;base64,{{ value.image1 | b64encode }}" alt="Testimonial Image 1" class="testimonial-image" id="previewImage1" style="width:100%; height:100%">
+                {% else %}
+                <img src="https://i.pinimg.com/736x/5e/19/c9/5e19c92ffcc857b8edb8026fc978ba57.jpg" alt="Testimonial Image 1" class="testimonial-image" id="previewImage1">
+                {% endif %}
+            </label>
+            <input type="file" name="image1" id="image1" class="file-input" style="display:none;" accept="image/*" onchange="previewImage(event, 'previewImage1')">
+        </div>
+        <div class="testimonial-card2">
+            <label for="image2">
+                {% if value.image2 %}
+                <img src="data:image/jpeg;base64,{{ value.image2 | b64encode }}" alt="Testimonial Image 1" class="testimonial-image" id="previewImage2" style="width:100%; height:100%">
+                {% else %}
+                <img src="https://i.pinimg.com/736x/5e/19/c9/5e19c92ffcc857b8edb8026fc978ba57.jpg" alt="Testimonial Image 1" class="testimonial-image" id="previewImage2">
+                {% endif %}
+            </label>
+            <input type="file" name="image2" id="image2" class="file-input" style="display:none;" accept="image/*" onchange="previewImage(event, 'previewImage2')">
+        </div>
+        <div class="testimonial-card2">
+            <label for="image3">
+                {% if value.image3 %}
+                <img src="data:image/jpeg;base64,{{ value.image3 | b64encode }}" alt="Testimonial Image 1" class="testimonial-image" id="previewImage3" style="width:100%; height:100%">
+                {% else %}
+                <img src="https://i.pinimg.com/736x/5e/19/c9/5e19c92ffcc857b8edb8026fc978ba57.jpg" alt="Testimonial Image 1" class="testimonial-image" id="previewImage3">
+                {% endif %}
+            </label>
+            <input type="file" name="image3" id="image3" class="file-input" style="display:none;" accept="image/*" onchange="previewImage(event, 'previewImage3')">
+        </div>
+    </div>
+    <br>
+    <div class="button-container-centered">
+        <button type="submit" class="btn btn-primary">Save Information</button>
+        <a href="/admin" class="btn btn-primary">Cancel</a>
+    </div>
+</form>
+{% endif %}
+<script>
+    function previewImage(event, previewId) {
+        const file = event.target.files[0];
+        if (file && file.type.startsWith("image/")) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const previewImage = document.getElementById(previewId);
+                previewImage.src = e.target.result;
+                previewImage.style.objectFit = "cover"; // Maintain aspect ratio and fill container
+                previewImage.style.borderRadius = "8px"; // Match existing style
+                previewImage.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.2)"; // Match existing style
+            };
+            reader.readAsDataURL(file);
+        } else {
+            alert("Please select a valid image file.");
+        }
+    }
+
+    document.getElementById("file-link").addEventListener("click", function() {
+    document.getElementById("file-input").click();
+});
+
+document.getElementById("file-input").addEventListener("change", function(event) {
+    var file = event.target.files[0];
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        document.getElementById('currentImage').style.display = 'none';
+        document.getElementById("preview").style.display = "block";
+        document.getElementById("preview").src = e.target.result;
+    }
+    reader.readAsDataURL(file);
+});
+
+</script>
+{% endblock %}

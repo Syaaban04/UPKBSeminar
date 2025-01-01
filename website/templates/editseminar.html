@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>UPKB - New Seminar</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        body {
+            background-color: #b9b9b9;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .form-container {
+            display: flex;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid black;
+            margin-bottom: 25px; 
+            margin-top: 25px;   
+        }
+
+        .form-container1 {
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid black;
+            margin-bottom: 25px; 
+            margin-top: 25px;  
+            align-items: center;
+        }
+
+        .box1 {
+            width: 550px;
+            padding: 0 20px 50px;
+            margin-bottom: 20px;
+            margin-top: 35px;
+            border-right: 1.5px solid #e0e0e0;
+        }
+        
+        .box {
+            width: 550px;
+            padding:50px;
+            margin-bottom: 20px;
+            border-right: 1.5px solid #e0e0e0;
+        }
+
+        .form-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-select, .form-control, .rating i {
+            font-size: 14px;
+        }
+
+        .rating:not(:checked) > input {
+  position: absolute;
+  appearance: none;
+}
+
+.rating:not(:checked) > label {
+ float : left;
+ align-items: left;
+  cursor: pointer;
+  font-size: 22px;
+  color: #666;
+}
+
+.rating:not(:checked) > label:before {
+  content: '★';
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+  color: #e58e09;
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+  color: #ff9e0b;
+}
+
+.rating > input:checked ~ label {
+  color: #ffa723;
+}
+
+        .btn {
+            margin-top: 10px;
+        }
+
+        .mgn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: white;
+            border-radius: 50%;
+            padding: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .mgn:hover {
+            background-color: rgb(216, 216, 216);
+            cursor: pointer;
+        }
+
+        h2.text-center {
+            display: none;
+            font-size: 30px;
+        }
+
+        h3.text-center {
+            font-size: 25px;
+            margin-bottom: 25px;
+            display: block;   
+        }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+            background: #fff;
+            padding: 30px;
+            border-radius: 30px;            
+        }
+
+        .img-area {
+            margin-top: 50px;
+            position: relative;
+            width: 100%;
+            height: 240px;
+            background: #f2f2f2;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border: 1.5px solid black;
+        }
+
+        .img-area .icon {
+            font-size: 100px;
+        }
+
+        .img-area h3 {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+
+        .img-area p {
+            color: #999;
+        }
+
+        .img-area p span {
+            font-weight: 600;
+        }
+
+        .img-area img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: 100;
+        }
+
+        .img-area::before {
+            content: attr(data-img);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .5);
+            color: #fff;
+            font-weight: 500;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none;
+            opacity: 0;
+            transition: all .3s ease;
+            z-index: 200;
+        }
+
+        .img-area.active:hover::before {
+            opacity: 1;
+        }
+
+        .select-image {
+            display: block;
+            width: 100%;
+            padding: 16px 0;
+            border-radius: 15px;
+            background: #0071FF;
+            color: #fff;
+            font-weight: 500;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: all .3s ease;
+        }
+
+        .select-image:hover {
+            background: #005DD1;
+        }
+
+        .img-area:hover {
+                transform: scale(1.05);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    
+            }
+        @media (max-width: 800px) {
+            body {
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: stretch;
+                height: auto;
+                padding: 80px;
+            }
+
+            .rating {
+                justify-content: center;
+            }
+
+            .mgn {
+                top: 10px;
+                left: 10px;
+                width: 40px;
+                padding: 3px;
+            }
+
+            h3.text-center {
+                display: none;
+            }
+
+            h2.text-center {
+                display: block;
+                margin-top: 10px;
+                margin-bottom: 20px;
+                font-size: 30px;
+            }
+
+            .img-area {
+                margin-top: 5px;
+                position: relative;
+                width: 100%;
+                height: 200px;
+                background: #f2f2f2;
+                margin-bottom: 16px;
+                border-radius: 15px;
+                overflow: hidden;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+
+
+            .form-container {
+                flex-direction: column;
+                box-shadow: 5px;
+                border-radius: 10px;
+                padding: 25px;
+                border: 1px solid black;
+            }
+
+            .form-container1 {
+                flex-direction: column;
+                box-shadow: 5px;
+                border-radius: 10px;
+                padding: 25px;
+                border: 1px solid black;
+            }
+
+            .box1 {
+                width: 100%;
+                border: 0px solid black;
+                padding: 0 60px 0px;
+                margin-bottom: 15px;
+            }
+
+            .box {
+                width: 100%;
+                border: 0px solid black;
+                padding: 0 60px 0px;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/seminarAdmin?negeri={{value.negeri}}&daerah={{value.daerah}}">
+        <img class="mgn" src="https://cdn.iconscout.com/icon/free/png-256/back-arrow-1767523-1502427.png" width="50px">
+    </a>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="form-container">
+            <div class="box">
+                <h2 class="text-center">Create New Seminar</h2>
+                <div class="orange-line"></div>
+                <div class="container">
+                <h3 class="text-center">Upload Image</h3>
+                {% if value.image %}
+                <input type="file" id="file" name="image" accept="image/*" style="display:none;">
+                <div class="img-area" id="img-area">
+                <img src="data:image/jpeg;base64,{{ value.image | b64encode }}" alt="Seminar Image" id="seminar-image" style="width:100%; height:100%;">
+            </div>
+                {% else %}
+                <input type="file" id="file" name="image" accept="image/*" style="display:none;">
+                <div class="img-area" id="img-area">
+                    <img src="https://i.pinimg.com/736x/5e/19/c9/5e19c92ffcc857b8edb8026fc978ba57.jpg" alt="Seminar Image" id="seminar-image" style="width:100%; height:100%;">
+                </div>
+                {% endif %}
+                {% if value.image2 %}
+                <input type="file" id="file2" name="image2" accept="image2/*" style="display:none;">
+                <div class="img-area" id="img-area2">
+                <img src="data:image/jpeg;base64,{{ value.image2 | b64encode }}" alt="Seminar Image" id="seminar-image" style="width:100%; height:100%;">
+            </div>
+                {% else %}
+                <input type="file" id="file2" name="image2" accept="image2/*" style="display:none;">
+                <div class="img-area" id="img-area2">
+                    <img src="https://i.pinimg.com/736x/5e/19/c9/5e19c92ffcc857b8edb8026fc978ba57.jpg" alt="Seminar Image" id="seminar-image" style="width:100%; height:100%;">
+                </div>
+                {% endif %}
+                {% if value.image3 %}
+                <input type="file" id="file3" name="image3" accept="image3/*" style="display:none;">
+                <div class="img-area" id="img-area3">
+                <img src="data:image/jpeg;base64,{{ value.image3 | b64encode }}" alt="Seminar Image" id="seminar-image" style="width:100%; height:100%;">
+            </div>
+                {% else %}
+                <input type="file" id="file3" name="image3" accept="image3/*" style="display:none;">
+                <div class="img-area" id="img-area3">
+                    <img src="https://i.pinimg.com/736x/5e/19/c9/5e19c92ffcc857b8edb8026fc978ba57.jpg" alt="Seminar Image" id="seminar-image" style="width:100%; height:100%;">
+                </div>
+                {% endif %}
+                {% if value.image4 %}
+                <input type="file" id="file4" name="image4" accept="image4/*" style="display:none;">
+                <div class="img-area" id="img-area4">
+                <img src="data:image/jpeg;base64,{{ value.image4 | b64encode }}" alt="Seminar Image" id="seminar-image" style="width:100%; height:100%;">
+            </div>
+                {% else %}
+                <input type="file" id="file4" name="image4" accept="image4/*" style="display:none;">
+                <div class="img-area" id="img-area4">
+                    <img src="https://i.pinimg.com/736x/5e/19/c9/5e19c92ffcc857b8edb8026fc978ba57.jpg" alt="Seminar Image" id="seminar-image" style="width:100%; height:100%;">
+                </div>
+                {% endif %}
+                
+            </label>
+            </div>
+        </div>
+    
+            <div class="box">
+                <h3 class="text-center">Create New Seminar</h3>
+                <div class="mb-3">
+                    <label for="negeri" class="form-label">Negeri:</label>
+                    <input type="text" class="form-control" name="negeri" value="{{value.negeri}}">
+                </div>
+    
+                <div class="mb-3">
+                    <label for="daerah" class="form-label">Daerah:</label>
+                    <input type="text" class="form-control" name="daerah" value="{{value.daerah}}">
+                </div>
+    
+                <div class="mb-3">
+                    <label for="seminar-name" class="form-label">Name:</label>
+                    <input type="text" class="form-control" name="name" value="{{value.name}}" placeholder="Enter name">
+                </div>
+    
+                <div class="mb-3">
+                    <label for="contact" class="form-label">Contact:</label>
+                    <input type="text" class="form-control" name="contact" value="{{value.contact}}" placeholder="Enter contact">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Price:</label>
+                    <input type="text" class="form-control" name="price"  value="{{value.price}}" placeholder="Enter price">
+                </div>
+
+            </div>
+        </div>
+    
+        <div class="form-container">
+            <div class="box">
+                <div class="mb-3">
+                    <label for="daerah" class="form-label">Location:</label>
+                    <input type="text" class="form-control" name="location" value="{{value.location}}" placeholder="Enter location">
+                </div>
+
+                <div class="mb-3">
+                    <label for="link" class="form-label">Link:</label>
+                    <input type="text" class="form-control" name="link" value="{{value.link}}" placeholder="location link">
+                </div>
+    
+                <div class="mb-3">
+                    <label for="facility" class="form-label">Facility:</label>
+                    <textarea class="form-control" name="facility" placeholder="Enter facility">{{value.facility}}</textarea>
+                </div>
+            </div>
+    
+            <div class="box">
+                <div class="mb-3">
+                    <label for="pax" class="form-label">Capacity:</label>
+                    <input type="number" class="form-control" name="pax" value="{{value.capacity}}" placeholder="Enter capacity">
+                </div>
+    
+                <div class="mb-3">
+                    <label for="desc" class="form-label">Description:</label>
+                    <textarea class="form-control" name="desc" placeholder="Enter description">{{value.desc}}</textarea>
+                </div>
+
+                  <div class="mb-3">
+                    <label for="rating" class="form-label">Rating:</label>
+                <div class="rating">
+                    <input value="5" name="rating" id="star5" type="radio">
+                    <label title="text" for="star5"></label>
+                    <input value="4" name="rating" id="star4" type="radio">
+                    <label title="text" for="star4"></label>
+                    <input value="3" name="rating" id="star3" type="radio">
+                    <label title="text" for="star3"></label>
+                    <input value="2" name="rating" id="star2" type="radio">
+                    <label title="text" for="star2"></label>
+                    <input value="1" name="rating" id="star1" type="radio">
+                    <label title="text" for="star1"></label>
+                  </div></div>
+    
+                <button type="submit" class="btn btn-primary w-100">Submit</button>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const ratingStars = document.querySelectorAll('#rating-stars i');
+            const ratingValue = document.getElementById('rating-value');
+
+            // Enable rating stars interaction
+            ratingStars.forEach((star, index) => {
+                star.addEventListener('click', () => {
+                    ratingStars.forEach((s, i) => s.classList.toggle('checked', i <= index));
+                    ratingValue.value = index + 1;  // Set the rating value
+                });
+            });
+        });
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+    const textareas = document.querySelectorAll('textarea');
+    const textInputs = document.querySelectorAll('input[type="text"]');
+
+    // Prevent form submission when Enter is pressed
+    form.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            // Prevent the default action of Enter (submitting the form)
+            event.preventDefault();
+
+            // Check if we're inside a textarea or input, then handle line break
+            if (event.target.tagName === 'TEXTAREA' || event.target.tagName === 'INPUT') {
+                const cursorPos = event.target.selectionStart;
+                const currentValue = event.target.value;
+
+                // Insert a new line character at cursor position
+                event.target.value = currentValue.slice(0, cursorPos) + '\n' + currentValue.slice(cursorPos);
+                event.target.selectionStart = event.target.selectionEnd = cursorPos + 1;
+            }
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const imageInputs = [
+        { fileInputId: 'file', imgAreaId: 'img-area' },
+        { fileInputId: 'file2', imgAreaId: 'img-area2' },
+        { fileInputId: 'file3', imgAreaId: 'img-area3' },
+        { fileInputId: 'file4', imgAreaId: 'img-area4' },
+    ];
+
+    imageInputs.forEach(({ fileInputId, imgAreaId }) => {
+        const fileInput = document.getElementById(fileInputId);
+        const imgArea = document.getElementById(imgAreaId);
+
+        imgArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    imgArea.innerHTML = `<img src="${e.target.result}" alt="Seminar Image" style="width:100%; height:100%;">`;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    })});
+
+    </script>
+
+</body>
+</html>

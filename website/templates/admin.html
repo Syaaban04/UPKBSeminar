@@ -1,0 +1,115 @@
+{% extends "navbarAdmin.html" %}
+{% block title %}UPKBN - Admin{% endblock %}
+{% block content %}
+
+{% include 'imageSlider.html'%}
+{% include 'event.html'%}
+
+
+{% if information %}
+{% for value in information %}
+<section class="testimonial-section">
+    <div class="orange-line"></div> 
+    <h2 class="form-header">{{value.name}}</h2>
+    <div class="orange-line"></div> <br><br>
+    <div class="button-box">
+        <a href="/deleteInfo?id={{value.id}}" class="image-button">
+            <img src="https://cdn-icons-png.flaticon.com/512/9713/9713380.png" alt="Delete" class="button-image">
+        </a>
+        <a href="/editInfo?id={{value.id}}" class="image-button">
+            <img src="https://cdn-icons-png.flaticon.com/512/3642/3642467.png" alt="Edit" class="button-image">
+        </a>
+    </div>
+    <div class="testimonial-container">
+        <div class="testimonial-card">
+            {% if value.image1 %}
+            <img id="currentImage" class="testimonial-image" src="data:image/jpeg;base64,{{ value.image1 | b64encode }}" alt="Testimonial Image 1" style="width:100%; height:100%;">
+            {% else %}
+            <img src="https://i.pinimg.com/736x/5e/19/c9/5e19c92ffcc857b8edb8026fc978ba57.jpg" alt="Testimonial Image 1" class="testimonial-image" style="width:100%; height:100%;">
+            {% endif %}
+        </div>
+        <div class="testimonial-card">
+            {% if value.image2 %}
+            <img id="currentImage" class="testimonial-image" src="data:image/jpeg;base64,{{ value.image2 | b64encode }}" alt="Testimonial Image 2" style="width:100%; height:100%;">
+            {% else %}
+            <img src="https://i.pinimg.com/736x/5e/19/c9/5e19c92ffcc857b8edb8026fc978ba57.jpg" alt="Testimonial Image 2" class="testimonial-image" style="width:100%; height:100%;">
+            {% endif %}
+        </div>
+        <div class="testimonial-card">
+            {% if value.image3 %}
+            <img id="currentImage" class="testimonial-image" src="data:image/jpeg;base64,{{ value.image3 | b64encode }}" alt="Testimonial Image 3" style="width:100%; height:100%;">
+            {% else %}
+            <img src="https://i.pinimg.com/736x/5e/19/c9/5e19c92ffcc857b8edb8026fc978ba57.jpg" alt="Testimonial Image 3" class="testimonial-image" style="width:100%; height:100%;">
+            {% endif %}
+        </div>
+    </div>
+    </section>
+{% endfor %}
+{% endif %}
+
+{% if info %}
+<section class="testimonial-section">
+<form method="post" enctype="multipart/form-data">
+    <div class="form-header">
+        <div class="orange-line"></div> 
+        <input type="text" name="name" class="testimonial-header" placeholder="Enter Name" required>
+    </div>
+    <div class="orange-line"></div> <br><br>
+    <div class="testimonial-container">
+        <div class="testimonial-card2">
+            <label for="image1">
+                <img src="https://i.pinimg.com/736x/5e/19/c9/5e19c92ffcc857b8edb8026fc978ba57.jpg" alt="Testimonial Image 1" class="testimonial-image" id="previewImage1">
+            </label>
+            <input type="file" name="image1" id="image1" class="file-input" style="display:none;" accept="image/*" onchange="previewImage(event, 'previewImage1')">
+        </div>
+        <div class="testimonial-card2">
+            <label for="image2">
+                <img src="https://i.pinimg.com/736x/5e/19/c9/5e19c92ffcc857b8edb8026fc978ba57.jpg" alt="Testimonial Image 2" class="testimonial-image" id="previewImage2">
+            </label>
+            <input type="file" name="image2" id="image2" class="file-input" style="display:none;" accept="image/*" onchange="previewImage(event, 'previewImage2')">
+        </div>
+        <div class="testimonial-card2">
+            <label for="image3">
+                <img src="https://i.pinimg.com/736x/5e/19/c9/5e19c92ffcc857b8edb8026fc978ba57.jpg" alt="Testimonial Image 3" class="testimonial-image" id="previewImage3">
+            </label>
+            <input type="file" name="image3" id="image3" class="file-input" style="display:none;" accept="image/*" onchange="previewImage(event, 'previewImage3')">
+        </div>
+    </div>
+    <br>
+    <div class="button-container-centered">
+        <button type="submit" class="btn btn-primary">Add Information</button>
+        <a href="/admin" class="btn btn-primary">Cancel</a>
+    </div>
+</form>
+<script>
+    function previewImage(event, previewId) {
+        const file = event.target.files[0];
+        if (file && file.type.startsWith("image/")) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const previewImage = document.getElementById(previewId);
+                previewImage.src = e.target.result;
+                previewImage.style.objectFit = "testimonial-card2"; // Maintain aspect ratio and fill container
+                previewImage.style.borderRadius = "8px"; // Match existing style
+                previewImage.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.2)"; // Match existing style
+            };
+            reader.readAsDataURL(file);
+        } else {
+            alert("Please select a valid image file.");
+        }
+    }
+</script>
+</section>
+{% else %}
+<section class="testimonial-section">
+    <br>
+<div class="button-container-centered">
+    <a href="/addinfo" class="image-button">
+        <img src="https://static-00.iconduck.com/assets.00/button-add-icon-2048x2048-7mizl7eo.png" alt="Add Information Button" class="button-image">
+    </a>
+</div>
+</section>
+{% endif %}
+
+{% endblock %}
+

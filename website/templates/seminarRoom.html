@@ -1,0 +1,179 @@
+{% extends 'navbar.html' %}
+{% block title %}UPKB - Seminar {% endblock %}
+
+{% block content %}
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+    .container1 {
+        margin-top: 20px;
+    }
+    h1 {
+        color: #000000; /* Pitch black for title */
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .card {
+        background: linear-gradient(to right, #ffab66, #fa7910);
+        border: none;
+
+        padding: 5px;
+        color: #ffffff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card:hover {
+    transform: scale(1.02); /* Slight zoom effect on hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+
+    }
+    .card1 {
+        background-color: #ffffff;
+        border: none;
+        border-radius: 0;
+        padding: 20px;
+        color: #ffffff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    .card-title{
+        font-size: 26px;
+        margin-bottom: 15px;
+    }
+    .card .card-body h5 {
+        font-weight: bold;
+        color: #000000; /* Pitch black for card title */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .card .card-body p {
+        color: #000000; /* Pitch black for card text */
+    }
+    .card .btn-primary {
+        background-color: #ffc107;
+        border: none;
+        color: #333;
+        font-weight: bold;
+        padding: 10px 20px;
+        border-radius: 8px;
+        margin-left: 20px;
+    }
+    .card .btn-secondary:hover {
+        background-color: #eceaea;
+        transform: scale(1.07);
+    }
+    .card .btn-secondary{
+        background-color: #ffffff;
+        color:#333;
+        font-weight: bold;
+        padding: 7px 15px;
+        border-radius: 8px;
+    }
+    .card .btn-danger{
+        font-weight: bold;
+        padding: 7px 15px;
+        border-radius: 8px;
+    }
+
+    .card .btn-danger:hover {
+        background-color: #ea4848cc;
+        transform: scale(1.07);
+    }
+
+    .rating i.checked {
+            color: orange;
+        }
+
+        .col-md-4 { 
+        object-fit: cover;   
+    }
+
+        .col-md-4 img { 
+        margin-top: 7%;
+        border-radius: 0;
+        border: 4px solid black;
+        aspect-ratio: 16/12.2;
+        object-fit: cover;  
+    }
+
+
+
+</style>
+
+<div class="container1">
+    <h1 style="text-transform: uppercase;">Seminar Rooms in {{negeri}},{{daerah}}</h1>
+    
+    {% if value %}
+    {% for value in value %}
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <div class="card" onclick="location.href='/viewDetail?id={{value.id}}&negeri={{negeri}}&daerah={{daerah}}'" style="cursor: pointer;">
+            <div class="card1">
+                <div class="row">
+                    <div class="col-md-4">
+                        {% if value.image %}
+                        <img src="data:image/jpeg;base64,{{ value.image | b64encode }}" alt="Room Image" class="img-fluid rounded-start">
+                        {% elif value.image2  %}
+                        <img src="data:image/jpeg;base64,{{ value.image2 | b64encode }}" alt="Room Image" class="img-fluid rounded-start">
+                        {% elif value.image3  %}
+                        <img src="data:image/jpeg;base64,{{ value.image3 | b64encode }}" alt="Room Image" class="img-fluid rounded-start">
+                        {% elif value.image4  %}
+                        <img src="data:image/jpeg;base64,{{ value.image4 | b64encode }}" alt="Room Image" class="img-fluid rounded-start">
+                        {$ else $}
+                        <img src="https://i.pinimg.com/736x/5e/19/c9/5e19c92ffcc857b8edb8026fc978ba57.jpg" alt="Room Image" class="img-fluid rounded-start" style="border-radius: 15px;height:100%;width:100%;">
+                        {% endif %}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title" style="text-transform: uppercase;">
+                                {{ value.name}}
+                            </h5>
+                            <p><strong>Price:</strong> {{ value.price }}</p>
+                            <p><strong>Location:</strong> {{ value.location }}</p>
+                            <p><strong>Capacity:</strong> {{ value.capacity }} pax</p>
+                            <p><strong>Facilities:</strong> {{ value.capacity }}</p>
+                            <div class="rating" id="rating-stars">
+                            <p><strong>Rating:</strong>
+                                {% if value.rating %}
+                                        {% for i in range(1, 6) %}
+                                            {% if value.rating >= i %}
+                                                <i class="fa fa-star checked"></i>
+                                            {% else %}
+                                                <i class="fa fa-star"></i>
+                                            {% endif %}
+                                        {% endfor %}
+                                {% else %}
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                {% endif %}                                    
+                            </p>
+                        </div>
+                        {% if value.contact %}
+                            <p><strong>Contact:</strong> {{ value.contact }}</p>
+                            <p><strong>Booking: </strong><a href="https://wa.me/{{ value.contact }}" class="btn btn-primary">Book via WhatsApp</a></p>
+                        {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <h2>There Are No Seminar Room Yet..........</h2>
+    {% endif %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

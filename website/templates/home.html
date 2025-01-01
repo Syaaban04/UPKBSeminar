@@ -1,0 +1,35 @@
+{% extends "navbar.html" %}
+{% block title %}UPKBN - Home{% endblock %}
+{% block content %}
+{% include 'imageSlider.html'%}
+{% include 'event.html'%}
+
+
+
+{% if information %}
+{% for value in information %}
+<section class="testimonial-section">
+    <div class="orange-line"></div> 
+    <h2 class="testimonial-title">{{value.name}}</h2>
+    <div class="orange-line"></div> <br><br>
+    <div class="testimonial-container">
+        {% if value.image1 %}
+        <div class="testimonial-card">
+            <img id="currentImage" class="testimonial-image" src="data:image/jpeg;base64,{{ value.image1 | b64encode }}" alt="Testimonial Image 1" style="width:100%; height:100%;">     
+        </div>
+        {% endif %}
+        {% if value.image2 %}
+        <div class="testimonial-card">
+            <img id="currentImage" class="testimonial-image" src="data:image/jpeg;base64,{{ value.image2 | b64encode }}" alt="Testimonial Image 2" style="width:100%; height:100%;">       
+        </div>
+        {% endif %}
+        {% if value.image3 %}
+        <div class="testimonial-card">
+            <img id="currentImage" class="testimonial-image" src="data:image/jpeg;base64,{{ value.image3 | b64encode }}" alt="Testimonial Image 3" style="width:100%; height:100%;">
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endfor %}
+{% endif %}
+{% endblock %}

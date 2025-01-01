@@ -1,0 +1,347 @@
+{% extends "navbarAdmin.html" %}
+{% block title %}UPKBN - Gallery{% endblock %}
+{% block content %}
+<style>
+    .gallery-header {
+        margin-bottom: 20px;
+        margin-left: 5px;
+        font-size: 25px;
+        font-weight: 500;
+    }
+
+    .container3 {
+        max-width: 1300px;
+        margin: 20px auto;
+        margin-bottom: 60px;
+        padding: 30px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
+        border-radius: 10px;
+    }
+
+    .gallery-menu {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 30px 100px;
+        margin-bottom: 60px;
+    }
+
+    .gallery-menu a {
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+        font-size: 16px;
+        cursor: pointer;
+        transition: color 0.3s;
+    }
+
+    .gallery-menu a.active {
+        color: #007BFF;
+    }
+
+    .testimonial-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .testimonial-card {
+        aspect-ratio: 16 / 9;
+        width: 32%;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        object-fit: cover;
+        opacity: 0; /* Hidden by default */
+        transform: scale(0.9); /* Slightly scaled down initially */
+        transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition */
+    }
+
+    .testimonial-card img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+
+    .testimonial-card.show {
+        opacity: 1; /* Fully visible */
+        transform: scale(1); /* Scale back to normal */
+    }
+
+    @media (max-width: 900px) {
+        .testimonial-card {
+            aspect-ratio: 4/4;
+            width: 45%;
+        }
+        .gallery-menu {
+        gap: 30px 30px;
+        margin-bottom: 60px;
+    }
+    }
+</style>
+
+<div class="container3">
+    <div class="gallery-header">
+        <p>Gallery</p>
+    </div>
+    <div class="gallery-menu">
+        <a href="#" data-category="taklimat" class="active">SESI TAKLIMAT & TEMUDUGA</a>
+        <a href="#" data-category="thailand">PERCUTIAN KE THAILAND</a>
+        <a href="#" data-category="camping" class="active">CAMPING ULU BENDUL</a>
+        <a href="#" data-category="info">INFO: BERITA TVET</a>
+        <a href="#" data-category="pendaftaran" class="active">SESI PENDAFTARAN</a>
+        <a href="#" data-category="timur" class="active">KEMAHIRAN TVET PANTAI TIMUR</a>
+
+     <div class="testimonial-container">
+        <!-- Sesi Taklimat & Temuduga Images -->
+        <div class="testimonial-card" data-category="taklimat">
+            <img src="https://upkb.my/storage/210/WhatsApp-Image-2023-11-29-at-11.11.00-AM.jpeg" alt="Event 1">
+        </div>
+        <div class="testimonial-card" data-category="taklimat">
+            <img src="https://upkb.my/storage/211/WhatsApp-Image-2023-11-29-at-11.15.44-AM.jpeg" alt="Event 2">
+        </div>
+        <div class="testimonial-card" data-category="taklimat">
+            <img src="https://upkb.my/storage/212/WhatsApp-Image-2023-11-29-at-11.16.08-AM.jpeg" alt="Event 2">
+        </div>
+        <div class="testimonial-card" data-category="taklimat">
+            <img src="https://upkb.my/storage/213/WhatsApp-Image-2023-11-29-at-11.17.08-AM.jpeg" alt="Event 2">
+        </div>
+        <div class="testimonial-card" data-category="taklimat">
+            <img src="https://upkb.my/storage/214/WhatsApp-Image-2023-11-29-at-11.18.18-AM.jpeg" alt="Event 2">
+        </div>
+        <div class="testimonial-card" data-category="taklimat">
+            <img src="https://upkb.my/storage/215/WhatsApp-Image-2023-11-29-at-11.19.25-AM.jpeg" alt="Event 2">
+        </div>
+        <div class="testimonial-card" data-category="taklimat">
+            <img src="https://upkb.my/storage/216/WhatsApp-Image-2023-11-29-at-11.19.26-AM.jpeg" alt="Event 2">
+        </div>
+        <div class="testimonial-card" data-category="taklimat">
+            <img src="https://upkb.my/storage/217/WhatsApp-Image-2023-12-31-at-3.03.22-PM-(1).jpeg" alt="Event 2">
+        </div>
+        <div class="testimonial-card" data-category="taklimat">
+            <img src="https://upkb.my/storage/218/WhatsApp-Image-2023-12-31-at-3.03.22-PM.jpeg" alt="Event 2">
+        </div>
+        <div class="testimonial-card" data-category="taklimat">
+            <img src="https://upkb.my/storage/219/WhatsApp-Image-2023-12-31-at-4.26.04-PM-(1).jpeg" alt="Event 2">
+        </div>
+        <div class="testimonial-card" data-category="taklimat">
+            <img src="https://upkb.my/storage/220/WhatsApp-Image-2023-12-31-at-4.26.04-PM-(2).jpeg" alt="Event 2">
+        </div>
+        <div class="testimonial-card" data-category="taklimat">
+            <img src="https://upkb.my/storage/221/WhatsApp-Image-2023-12-31-at-4.26.05-PM-(2).jpeg" alt="Event 2">
+        </div>
+
+        <!-- Percutian ke Thailand Images -->
+        <div class="testimonial-card" data-category="thailand">
+            <img src="{{ url_for('static', filename='images/thai1.jpeg') }}" alt="Thailand 1">
+        </div>
+        <div class="testimonial-card" data-category="thailand">
+            <img src="{{ url_for('static', filename='images/thai2.jpeg') }}" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="thailand">
+            <img src="{{ url_for('static', filename='images/thai3.jpeg') }}" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="thailand">
+            <img src="{{ url_for('static', filename='images/thai4.jpeg') }}" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="thailand">
+            <img src="{{ url_for('static', filename='images/thai5.jpeg') }}" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="thailand">
+            <img src="{{ url_for('static', filename='images/thai6.jpeg') }}" alt="Thailand 2">
+        </div>
+
+            <!-- Info Tvet -->
+        <div class="testimonial-card" data-category="info">
+            <img src="https://upkb.my/storage/337/WhatsApp-Image-2024-01-20-at-8.59.48-AM.jpeg" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="info">
+            <img src="https://upkb.my/storage/338/WhatsApp-Image-2024-01-20-at-9.00.41-AM.jpeg" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="info">
+            <img src="https://upkb.my/storage/339/WhatsApp-Image-2024-01-22-at-5.39.55-PM.jpeg" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="info">
+            <img src="https://upkb.my/storage/340/WhatsApp-Image-2024-01-22-at-5.39.57-PM-(1).jpeg" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="info">
+            <img src="https://upkb.my/storage/341/WhatsApp-Image-2024-01-22-at-5.39.57-PM-(2).jpeg" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="info">
+            <img src="https://upkb.my/storage/342/WhatsApp-Image-2024-01-22-at-5.39.57-PM.jpeg" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="info">
+            <img src="https://upkb.my/storage/343/WhatsApp-Image-2024-01-22-at-5.39.58-PM.jpeg" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="info">
+            <img src="https://upkb.my/storage/345/WhatsApp-Image-2024-01-22-at-5.40.00-PM.jpeg" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="info">
+            <img src="https://upkb.my/storage/409/brita-1.png" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="info">
+            <img src="https://upkb.my/storage/410/brita-2.jpg" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="info">
+            <img src="https://upkb.my/storage/411/brita-4.jpeg" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="info">
+            <img src="https://upkb.my/storage/412/brita-5.png" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="info">
+            <img src="https://upkb.my/storage/413/brita-6.jpg" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="info">
+            <img src="https://upkb.my/storage/414/brita-7.jpg" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="info">
+            <img src="https://upkb.my/storage/462/keratan-akhabr-.jpg" alt="Thailand 2">
+        </div>
+
+            <!-- Sesi Pendaftaran -->
+            <div class="testimonial-card" data-category="pendaftaran">
+                <img src="https://upkb.my/storage/204/6.jpg" alt="Thailand 1">
+            </div>
+            <div class="testimonial-card" data-category="pendaftaran">
+                <img src="https://upkb.my/storage/199/1.jpg" alt="Thailand 2">
+            </div>
+            <div class="testimonial-card" data-category="pendaftaran">
+                <img src="https://upkb.my/storage/200/2.jpg" alt="Thailand 2">
+            </div>
+            <div class="testimonial-card" data-category="pendaftaran">
+                <img src="https://upkb.my/storage/201/3.jpg" alt="Thailand 2">
+            </div>
+            <div class="testimonial-card" data-category="pendaftaran">
+                <img src="https://upkb.my/storage/202/4.jpg" alt="Thailand 2">
+            </div>
+            <div class="testimonial-card" data-category="pendaftaran">
+                <img src="https://upkb.my/storage/203/5.jpg" alt="Thailand 2">
+            </div>
+            <div class="testimonial-card" data-category="pendaftaran">
+                <img src="https://upkb.my/storage/205/7.jpg" alt="Thailand 2">
+            </div>
+            <div class="testimonial-card" data-category="pendaftaran">
+                <img src="https://upkb.my/storage/208/WhatsApp-Image-2023-11-29-at-11.05.34-AM.jpeg" alt="Thailand 2">
+            </div>
+            <div class="testimonial-card" data-category="pendaftaran">
+                <img src="https://upkb.my/storage/209/WhatsApp-Image-2023-11-29-at-11.05.35-AM.jpeg" alt="Thailand 2">
+            </div>
+            
+                    <!-- Camping Ulu Bendul -->
+        <div class="testimonial-card" data-category="camping">
+            <img src="{{ url_for('static', filename='images/camp1.jpg') }}" alt="Thailand 1">
+        </div>
+        <div class="testimonial-card" data-category="camping">
+            <img src="{{ url_for('static', filename='images/camp2.jpg') }}" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="camping">
+            <img src="{{ url_for('static', filename='images/camp3.jpg') }}" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="camping">
+            <img src="{{ url_for('static', filename='images/camp4.jpg') }}" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="camping">
+            <img src="{{ url_for('static', filename='images/camp5.jpg') }}" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="camping">
+            <img src="{{ url_for('static', filename='images/camp6.jpg') }}" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="camping">
+            <img src="{{ url_for('static', filename='images/camp7.jpg') }}" alt="Thailand 1">
+        </div>
+        <div class="testimonial-card" data-category="camping">
+            <img src="{{ url_for('static', filename='images/camp8.jpg') }}" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="camping">
+            <img src="{{ url_for('static', filename='images/camp9.jpg') }}" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="camping">
+            <img src="{{ url_for('static', filename='images/camp10.jpg') }}" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="camping">
+            <img src="{{ url_for('static', filename='images/camp11.jpg') }}" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="camping">
+            <img src="{{ url_for('static', filename='images/camp12.jpg') }}" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="camping">
+            <img src="{{ url_for('static', filename='images/camp13.jpg') }}" alt="Thailand 1">
+        </div>
+        <div class="testimonial-card" data-category="camping">
+            <img src="{{ url_for('static', filename='images/camp14.jpg') }}" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="camping">
+            <img src="{{ url_for('static', filename='images/camp15.jpg') }}" alt="Thailand 2">
+        </div>
+        <div class="testimonial-card" data-category="camping">
+            <img src="{{ url_for('static', filename='images/camp16.jpg') }}" alt="Thailand 2">
+        </div>  
+
+                <!-- Kemahiran TVET pantai timur -->
+                <div class="testimonial-card" data-category="timur">
+                    <img src="https://upkb.my/storage/328/WhatsApp-Image-2024-01-09-at-2.58.37-PM.jpeg" alt="Event 1">
+                </div>
+                <div class="testimonial-card" data-category="timur">
+                    <img src="https://upkb.my/storage/329/WhatsApp-Image-2024-01-09-at-3.00.27-PM.jpeg" alt="Event 2">
+                </div>
+                <div class="testimonial-card" data-category="timur">
+                    <img src="https://upkb.my/storage/330/WhatsApp-Image-2024-01-12-at-11.04.20-AM.jpeg" alt="Event 2">
+                </div>
+                <div class="testimonial-card" data-category="timur">
+                    <img src="https://upkb.my/storage/331/WhatsApp-Image-2024-01-12-at-11.06.01-AM.jpeg" alt="Event 2">
+                </div>
+                <div class="testimonial-card" data-category="timur">
+                    <img src="https://upkb.my/storage/332/WhatsApp-Image-2024-01-12-at-11.06.07-AM.jpeg" alt="Event 2">
+                </div>
+                <div class="testimonial-card" data-category="timur">
+                    <img src="https://upkb.my/storage/333/WhatsApp-Image-2024-01-12-at-11.06.23-AM.jpeg" alt="Event 2">
+                </div>
+                <div class="testimonial-card" data-category="timur">
+                    <img src="https://upkb.my/storage/334/WhatsApp-Image-2024-01-12-at-11.25.46-AM.jpeg" alt="Event 2">
+                </div>
+                <div class="testimonial-card" data-category="timur">
+                    <img src="https://upkb.my/storage/335/WhatsApp-Image-2024-01-12-at-11.25.47-AM-(1).jpeg" alt="Event 2">
+                </div>
+                <div class="testimonial-card" data-category="timur">
+                    <img src="https://upkb.my/storage/336/WhatsApp-Image-2024-01-12-at-11.25.47-AM.jpeg" alt="Event 2">
+                </div>
+ 
+    </div>
+</div>
+
+<script>
+    const menuLinks = document.querySelectorAll('.gallery-menu a');
+    const testimonialCards = document.querySelectorAll('.testimonial-card');
+
+    menuLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            // Remove active class from all links
+            menuLinks.forEach(item => item.classList.remove('active'));
+
+            // Add active class to the clicked link
+            link.classList.add('active');
+
+            // Get the selected category
+            const category = link.getAttribute('data-category');
+
+            // Hide all cards with a transition
+            testimonialCards.forEach(card => {
+                card.classList.remove('show'); // Hide the card
+                setTimeout(() => {
+                    if (card.getAttribute('data-category') === category) {
+                        card.style.display = 'block'; // Make it displayable
+                        card.classList.add('show'); // Add the show class to fade in
+                    } else {
+                        card.style.display = 'none'; // Hide completely after transition
+                    }
+                }, 300); // Delay matches the CSS transition time
+            });
+        });
+    });
+
+    // Trigger the default view (first category)
+    document.querySelector('.gallery-menu a.active').click();
+</script>
+{% endblock %}

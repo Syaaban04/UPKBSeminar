@@ -1,0 +1,15 @@
+{% extends 'loginpage.html'%}
+{% block title %}Reset Password{% endblock %}
+{% block head %}Confirm Your email {% endblock %}
+{% block content %}
+<form method="post">
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" name="email" class="form-control" id="email" placeholder="Email" required>
+    </div><br>
+    <button type="submit" class="btn btn-primary">Send Reset Link</button>
+    <div class="terms-contact">
+        <a href="/login">Go back</a>
+    </div>
+</form>
+{% endblock %}
