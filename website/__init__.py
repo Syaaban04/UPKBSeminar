@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from os import path
 from flask_mail import Mail
+import os
 import base64
 
 def base64_encode(data):
@@ -11,13 +11,22 @@ def base64_encode(data):
         return None
 
 db = SQLAlchemy()
-mail = Mail()  # Create the Mail object
-DB_NAME = 'database.db'
+mail = Mail()
 
 def create_app():
     app = Flask(__name__)
     app.secret_key = 'upkb'
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+
+    # Database configuration
+    # Check for a DATABASE_URL environment variable (used in deployment) or default to SQLite for local development
+    database_url = os.getenv('DATABASE_URL', 'sqlite:///database.db')
+    
+    # Render PostgreSQL databases use URLs with SSL; update the URI if necessary
+    if database_url.startswith("postgres://"):
+        database_url = database_url.replace("postgres://", "postgresql://")
+    
+    app.config['SQLALCHEMY_DATABASE_URI'] = database_url
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     # Flask-Mail configuration
     app.config['MAIL_SERVER'] = 'smtp.gmail.com'
@@ -27,7 +36,7 @@ def create_app():
     app.config['MAIL_PASSWORD'] = 'zyjg xmnh hpwu eien'  # Replace with your app password
 
     db.init_app(app)
-    mail.init_app(app)  # Initialize the Mail object
+    mail.init_app(app)
 
     from .views import views
     from .auth import auth
@@ -35,14 +44,8 @@ def create_app():
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
     app.jinja_env.filters['b64encode'] = base64_encode
-    
-    from . import models
 
-    create_database(app)
+    with app.app_context():
+        db.create_all()  # Ensure tables are created
 
     return app
-
-def create_database(app):
-    if not path.exists('website/' + DB_NAME):
-        with app.app_context():
-            db.create_all()
